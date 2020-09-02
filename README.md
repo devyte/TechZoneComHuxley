@@ -6,7 +6,13 @@ https://reprap.org/wiki/TechZoneHuxley
 
 I found that the last firmware left at reprap.org for posterity had some details, so the first thing to do is obviously put it under version control, then implement fixes.
 
-# History
+# Connection to the Past
+The initial commits are:
+- Sanguino core 0023r4, as found [here](https://code.google.com/archive/p/sanguino/downloads)
+- TechZone Huxley firmware as found [here](https://reprap.org/wiki/Monotronics)
+- Arduino IDE 0023 as found [here](https://www.arduino.cc/en/Main/OldSoftwareReleases#previous)
+
+# History (aka why?)
 I bought this printer kit something like 10 years ago. To receive it at an affordable price (i.e.: not pay a ridiculous amount for international S&H etc), I had to impose on a new colleague. Back then, new hires were sent on a training trip for a month, and as part of the "initiation", they are "required" to be the "mule" for the senior colleagues, i.e.: bring back stuff we had bought. So this new guy got the short straw with me, and had to come home with a bags full of screws, nuts, steppers, electronics, etc :)
 I assembled it, calibrated most of the settings, did exactly 2 test prints, and had only 1 setting left to calibrate: the amount of filling (the roof of a cube ended up sagging inwards), when life intruded, and I got married. 
 
