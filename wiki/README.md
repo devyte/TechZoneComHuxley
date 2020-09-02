@@ -1,9 +1,9 @@
 # Notes
 
-## In the Sanguino core (obsolete, already committed fixes>)
+## In the Sanguino core (obsolete, already committed fixes)
 - Edit boards.txt baudrate to 38400 (bootloader in the atmega644 was built with that)
 
-## In the Monotronics Firmware (obsolete, already committed fixes>)
+## In the Monotronics Firmware (obsolete, already committed fixes)
 - Edit FiveD_GCode_Interpreter.pde move #include "WProgram.h" up above #include <HardwareSerial.h>
 - Edit configuration.h, look for the section MOTHERBOARD == 3, look for the #define Z_STEPS_PER_MM define, it should be 1000 
 
