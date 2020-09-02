@@ -8,7 +8,7 @@
 - Edit configuration.h, look for the section MOTHERBOARD == 3, look for the #define Z_STEPS_PER_MM define, it should be 1000 
 
 ## Setup before building
-- Copy the Sanguino core into hardware/Sanguino of the IDE dir. You should have a dir structure like this:
+- Copy the Sanguino core dir into hardware/Sanguino of the IDE dir. You should have a dir structure like this:
 ```
 arduino-0021
 |-hardware
@@ -18,7 +18,9 @@ arduino-0021
 ```
 
 ## In the Arduino IDE
+- Open arduino-0021/arduino.exe
 - Set serial monitor baud to 19200
+- Open MonotronicsFirmware/FiveD_GCode/FiveD_GCode_Interpreter/FiveD_GCode_Interpreter.pde
 - Click Upload, should see "Uploading to I/O Board..." message. Don't wait for this to be done, continue with...
 - Press and hold the reset button on the electronics
 - Wait for the "Binary sketch size: blah bytes" message, then immediately release the reset button
