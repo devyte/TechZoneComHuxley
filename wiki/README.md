@@ -7,6 +7,16 @@
 - Edit FiveD_GCode_Interpreter.pde move #include "WProgram.h" up above #include <HardwareSerial.h>
 - Edit configuration.h, look for the section MOTHERBOARD == 3, look for the #define Z_STEPS_PER_MM define, it should be 1000 
 
+## Setup before building
+- Copy the Sanguino core into hardware/Sanguino of the IDE dir. You should have a dir structure like this:
+```
+arduino-0021
+|-hardware
+  |-Sanguino
+  |-arduino
+  |-tools
+```
+
 ## In the Arduino IDE
 - Set serial monitor baud to 19200
 - Click Upload, should see "Uploading to I/O Board..." message. Don't wait for this to be done, continue with...
