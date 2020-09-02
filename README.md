@@ -12,6 +12,8 @@ The initial commits are:
 - TechZone Huxley firmware MonotronicsFirmware02182011 as found [here](https://reprap.org/wiki/Monotronics)
 - Arduino IDE 0021 as found [here](https://www.arduino.cc/en/Main/OldSoftwareReleases#previous)
 
+I suppose I could do away with the old Arduino core and just provde a link, but I want to have everything in one place.
+
 # History (aka why?)
 I bought this printer kit something like 10 years ago. To receive it at an affordable price (i.e.: not pay a ridiculous amount for international S&H etc), I had to impose on a new colleague. Back then, new hires were sent on a training trip for a month, and as part of the "initiation", they are "required" to be the "mule" for the senior colleagues, i.e.: bring back stuff we had bought. So this new guy got the short straw with me, and had to come home with a bags full of screws, nuts, steppers, electronics, etc :)
 I assembled it, calibrated most of the settings, did exactly 2 test prints, and had only 1 setting left to calibrate: the amount of filling (the roof of a cube ended up sagging inwards), when life intruded, and I got married. 
@@ -45,4 +47,4 @@ I _think_ the old Arduino IDE is also GPL, per the github page [here](https://gi
 # Acknowledgements
 Thanks to @moose4621 for finding the info again at reprap.org, I had long lost the links. And for getting me back into XYZ machines!
 
-Thanks to TechZone Communications and the engineers who published the details for posterity. I consider the info left behind an example of future proofing a product, and it is certainly an example in open source. 10 years later, and I am able to print replacement parts, tweak and rebuild the firmware, follow the assembly instructions, and overall figure things out, all thanks things having been done right. I hope somebody who was a part of all of that reads this some day.
+Thanks to TechZone Communications and the engineers who published the details for posterity. I consider the info left behind an example of future proofing a product, and it is certainly an example in open source. 10 years later, and I am able to print replacement parts, tweak and rebuild the firmware, follow the assembly instructions, and overall figure things out, all thanks to things having been done right. I hope somebody who was a part of all of that reads this some day.
