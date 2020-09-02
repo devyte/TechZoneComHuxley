@@ -6,7 +6,7 @@
 
 ## In the Monotronics Firmware
 - Edit FiveD_GCode_Interpreter.pde move #include "WProgram.h" up above #include <HardwareSerial.h>
-- Edit configuration.h, look for the section MOTHERBOARD == 3, look for the STEPS_PER_MM define, it should be 1000 
+- Edit configuration.h, look for the section MOTHERBOARD == 3, look for the #define Z_STEPS_PER_MM define, it should be 1000 
 
 ## In the Arduino IDE
 - Set serial monitor baud to 19200
