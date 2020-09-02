@@ -1,4 +1,6 @@
 # TechZone Communications Huxley
+
+## What is this? (aka Connection to the present)
 Firmware build for the old TechZone Communications Huxley RepRap 3D printer
 
 The initial contents of this repo come from here, or from links found there:
@@ -6,7 +8,7 @@ https://reprap.org/wiki/TechZoneHuxley
 
 I found that the last firmware left at reprap.org for posterity had some details, so the first thing to do is obviously put it under version control, then implement fixes.
 
-# Connection to the Past
+## Where did this come from? (aka Connection to the Past)
 The initial commits are:
 - Sanguino core 0023r4, as found [here](https://code.google.com/archive/p/sanguino/downloads)
 - TechZone Huxley firmware MonotronicsFirmware02182011 as found [here](https://reprap.org/wiki/Monotronics)
@@ -14,7 +16,23 @@ The initial commits are:
 
 I suppose I could do away with the old Arduino core and just provde a link, but I want to have everything in one place.
 
-# History (aka why?)
+## Where is this headed? (aka Connection to the Future)
+My idea is to eventually build Marlin for the Monotronics board. However, due to some special tip/bed handling code, I think the Marling firmware can't be built as-is. The current recommendation is to remove the tip/bed managers, but that requires modrifying the hardware, and I don't want to do that.
+So, I want to study what is so special about the tip/bed managers, and then introduce that code into the Marlin source base.
+At this time, the roadmap is:
+[x] build the original firmware as it was
+[x] fix the most glaring bugs
+[] port the old firmware to build with a newer [Sanguino core](https://github.com/Lauszus/Sanguino) in a newer Arduino IDE
+[] fill in the most glaring missing features to get the firmware to work with modern slicers like Cura
+[] figure out what the special code for the tip/manager is
+[] trace the code to figure out how it works
+[] build a bare-bones Marlin for the Monotronics board (no tip/bed handling, just move the 4 axis and have the end stops working)
+[] patch in the tip/bed manager code
+[] submit a PR to Marlin with the proposal
+
+Let's see how far I get in the above...
+
+## History (aka why?)
 I bought this printer kit something like 10 years ago. To receive it at an affordable price (i.e.: not pay a ridiculous amount for international S&H etc), I had to impose on a new colleague. Back then, new hires were sent on a training trip for a month, and as part of the "initiation", they are "required" to be the "mule" for the senior colleagues, i.e.: bring back stuff we had bought. So this new guy got the short straw with me, and had to come home with a bags full of screws, nuts, steppers, electronics, etc :)
 I assembled it, calibrated most of the settings, did exactly 2 test prints, and had only 1 setting left to calibrate: the amount of filling (the roof of a cube ended up sagging inwards), when life intruded, and I got married. 
 
