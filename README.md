@@ -9,7 +9,7 @@ I found that the last firmware left at reprap.org for posterity had some details
 # Connection to the Past
 The initial commits are:
 - Sanguino core 0023r4, as found [here](https://code.google.com/archive/p/sanguino/downloads)
-- TechZone Huxley firmware as found [here](https://reprap.org/wiki/Monotronics)
+- TechZone Huxley firmware MonotronicsFirmware02182011 as found [here](https://reprap.org/wiki/Monotronics)
 - Arduino IDE 0023 as found [here](https://www.arduino.cc/en/Main/OldSoftwareReleases#previous)
 
 # History (aka why?)
