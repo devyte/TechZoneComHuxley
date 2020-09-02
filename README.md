@@ -1,5 +1,5 @@
 # TechZone Communications Huxley
-Firmware build for the old TechZone Communications Huxley RepRap
+Firmware build for the old TechZone Communications Huxley RepRap 3D printer
 
 The initial contents of this repo come from here, or from links found there:
 https://reprap.org/wiki/TechZoneHuxley
