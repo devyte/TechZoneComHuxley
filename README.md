@@ -20,15 +20,16 @@ I suppose I could do away with the old Arduino core and just provde a link, but 
 My idea is to eventually build Marlin for the Monotronics board. However, due to some special tip/bed handling code, I think the Marling firmware can't be built as-is. The current recommendation is to remove the tip/bed managers, but that requires modrifying the hardware, and I don't want to do that.
 So, I want to study what is so special about the tip/bed managers, and then introduce that code into the Marlin source base.
 At this time, the roadmap is:
-[x] build the original firmware as it was
-[x] fix the most glaring bugs
-[] port the old firmware to build with a newer [Sanguino core](https://github.com/Lauszus/Sanguino) in a newer Arduino IDE
-[] fill in the most glaring missing features to get the firmware to work with modern slicers like Cura
-[] figure out what the special code for the tip/manager is
-[] trace the code to figure out how it works
-[] build a bare-bones Marlin for the Monotronics board (no tip/bed handling, just move the 4 axis and have the end stops working)
-[] patch in the tip/bed manager code
-[] submit a PR to Marlin with the proposal
+
+    [x] build the original firmware as it was
+    [x] fix the most glaring bugs
+    [] port the old firmware to build with a newer [Sanguino core](https://github.com/Lauszus/Sanguino) in a newer Arduino IDE
+    [] fill in the most glaring missing features to get the firmware to work with modern slicers like Cura
+    [] figure out what the special code for the tip/manager is
+    [] trace the code to figure out how it works
+    [] build a bare-bones Marlin for the Monotronics board (no tip/bed handling, just move the 4 axis and have the end stops working)
+    [] patch in the tip/bed manager code
+    [] submit a PR to Marlin with the proposal
 
 Let's see how far I get in the above...
 
