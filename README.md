@@ -9,7 +9,7 @@ https://reprap.org/wiki/TechZoneHuxley
 I found that the last firmware left at reprap.org for posterity had some details, so the first thing to do is obviously put it under version control, then implement fixes.
 
 ## Where did this come from? (aka Connection to the Past)
-The initial commits are:
+The initial commits are (minor fixes already included):
 - Sanguino core 0023r4, as found [here](https://code.google.com/archive/p/sanguino/downloads)
 - TechZone Huxley firmware MonotronicsFirmware02182011 as found [here](https://reprap.org/wiki/Monotronics)
 - Arduino IDE 0021 as found [here](https://www.arduino.cc/en/Main/OldSoftwareReleases#previous)
