@@ -128,6 +128,7 @@ inline void specialMoveZ(const float& z, const float& feed)
 int last_gcode_g = -1;
 
 boolean abs_mode = true; //0 = incremental; 1 = absolute
+boolean abs_mode_E = true; //devyte: for M82/M83: extruder rel/abs
 
 float extruder_speed = 0;
 
@@ -331,8 +332,6 @@ void process_string(char instruction[], int size)
 				fp.y = gc.Y;
 			if (gc.seen & GCODE_Z)
 				fp.z = gc.Z;
-			if (gc.seen & GCODE_E)
-				fp.e = gc.E;
 		}
 		else
 		{
@@ -342,9 +341,18 @@ void process_string(char instruction[], int size)
 				fp.y += gc.Y;
 			if (gc.seen & GCODE_Z)
 				fp.z += gc.Z;
-			if (gc.seen & GCODE_E)
-				fp.e += gc.E;
 		}
+
+                if(abs_mode_E)
+                {
+          		if (gc.seen & GCODE_E)
+				fp.e = gc.E;                  
+                }
+                else
+                {
+			if (gc.seen & GCODE_E)
+				fp.e += gc.E;                  
+                }
 
 		// Get feedrate if supplied - feedrates are always absolute???
 		if ( gc.seen & GCODE_F )
@@ -430,11 +438,13 @@ void process_string(char instruction[], int size)
 			//Absolute Positioning
 			case 90: 
 				abs_mode = true;
+                                abs_mode_E = true;
 				break;
 
 			//Incremental Positioning
 			case 91: 
 				abs_mode = false;
+                                abs_mode_E = false;
 				break;
 
 			//Set position as fp
@@ -479,6 +489,14 @@ void process_string(char instruction[], int size)
 				 //todo: program end
 				 break;
 				 */
+
+                        case 82:
+                                abs_mode_E = true;
+                                break;
+
+                        case 83:
+                                abs_mode_E = false;
+                                break;
 
 // Now, with E codes, there is no longer any idea of turning the extruder on or off.
 // (But see valve on/off below.)
