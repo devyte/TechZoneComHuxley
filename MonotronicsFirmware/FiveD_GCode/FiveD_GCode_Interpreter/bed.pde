@@ -212,8 +212,6 @@ void bed::controlTemperature()
 
 void bed::waitForTemperature()
 {
-   #ifdef USE_TECHZONETIPMANAGE
-   #else
   byte seconds = 0;
   bool warming = true;
   count = 0;
@@ -227,7 +225,7 @@ void bed::waitForTemperature()
     if(count > 5)
     {
       newT = newT/5;
-      if(newT >= bedPID->getTarget() - HALF_DEAD_ZONE)
+      if(newT >= getTarget() - HALF_DEAD_ZONE)
       {
         warming = false;
         if(seconds > WAIT_AT_TEMPERATURE)
@@ -257,7 +255,6 @@ void bed::waitForTemperature()
       delay(1);
     }
   }
-  #endif
 }
 
 // This is a fatal error - something is wrong with the heater.

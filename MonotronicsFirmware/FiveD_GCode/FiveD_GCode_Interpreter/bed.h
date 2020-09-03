@@ -16,6 +16,7 @@ public:
    
    void setTemperature(int temp);
    int getTemperature();
+   int getTarget();
    void slowManage();
    void manage();
    void shutdown();
@@ -30,7 +31,7 @@ byte timeoutLow();
  
 private:
 
-//   int targetTemperature;
+   int targetTemperature;
    int count;
    int oldT, newT;
    long manageCount;
@@ -46,6 +47,15 @@ private:
    byte heater_pin,  temp_pin;
  
 };
+
+inline int bed::getTarget()
+{
+#ifdef USE_TECHZONETIPMANAGE   
+   return targetTemperature; 
+#else
+   return bedPID->getTarget();
+#endif   
+}
 
 inline void bed::slowManage()
 {
