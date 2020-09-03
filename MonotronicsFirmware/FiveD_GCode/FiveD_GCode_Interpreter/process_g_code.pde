@@ -119,6 +119,43 @@ inline void specialMoveZ(const float& z, const float& feed)
   qMove(sp);
 }
 
+void zeroX()
+{
+  where_i_am.f = SLOW_XY_FEEDRATE;
+  specialMoveX(where_i_am.x - 5, FAST_XY_FEEDRATE);
+  specialMoveX(where_i_am.x - 250, FAST_XY_FEEDRATE);
+  where_i_am.x = 0;
+  where_i_am.f = SLOW_XY_FEEDRATE;
+  specialMoveX(where_i_am.x + 1, SLOW_XY_FEEDRATE);
+  specialMoveX(where_i_am.x - 10, SLOW_XY_FEEDRATE);                                
+  where_i_am.x = 0;  
+}
+
+void zeroY()
+{
+  specialMoveY(where_i_am.y - 5, FAST_XY_FEEDRATE);
+  specialMoveY(where_i_am.y - 250, FAST_XY_FEEDRATE);
+  where_i_am.y = 0;
+  where_i_am.f = SLOW_XY_FEEDRATE;
+  specialMoveY(where_i_am.y + 1, SLOW_XY_FEEDRATE);
+  specialMoveY(where_i_am.y - 10, SLOW_XY_FEEDRATE);                                
+  where_i_am.y = 0; 
+   
+}
+
+void zeroZ()
+{
+  where_i_am.f = SLOW_Z_FEEDRATE;
+  specialMoveZ(where_i_am.z - 0.5, FAST_Z_FEEDRATE);
+  specialMoveZ(where_i_am.z - 250, FAST_Z_FEEDRATE);
+  where_i_am.z = 0;
+  where_i_am.f = SLOW_Z_FEEDRATE;
+  specialMoveZ(where_i_am.z + 1, SLOW_Z_FEEDRATE);
+  specialMoveZ(where_i_am.z - 2, SLOW_Z_FEEDRATE);                                
+  where_i_am.z = 0;  
+}
+
+
 //our feedrate variables.
 //float feedrate = SLOW_XY_FEEDRATE;
 
@@ -378,37 +415,34 @@ void process_string(char instruction[], int size)
                                 
                         //go home.
 			case 28:
-                                where_i_am.f = SLOW_XY_FEEDRATE;
-                                specialMoveX(where_i_am.x - 5, FAST_XY_FEEDRATE);
-                                specialMoveX(where_i_am.x - 250, FAST_XY_FEEDRATE);
-                                where_i_am.x = 0;
-                                where_i_am.f = SLOW_XY_FEEDRATE;
-                                specialMoveX(where_i_am.x + 1, SLOW_XY_FEEDRATE);
-                                specialMoveX(where_i_am.x - 10, SLOW_XY_FEEDRATE);                                
-                                where_i_am.x = 0;
-                                
-                                specialMoveY(where_i_am.y - 5, FAST_XY_FEEDRATE);
-                                specialMoveY(where_i_am.y - 250, FAST_XY_FEEDRATE);
-                                where_i_am.y = 0;
-                                where_i_am.f = SLOW_XY_FEEDRATE;
-                                specialMoveY(where_i_am.y + 1, SLOW_XY_FEEDRATE);
-                                specialMoveY(where_i_am.y - 10, SLOW_XY_FEEDRATE);                                
-                                where_i_am.y = 0; 
- 
-                                where_i_am.f = SLOW_Z_FEEDRATE;
-                                specialMoveZ(where_i_am.z - 0.5, FAST_Z_FEEDRATE);
-                                specialMoveZ(where_i_am.z - 250, FAST_Z_FEEDRATE);
-                                where_i_am.z = 0;
-                                where_i_am.f = SLOW_Z_FEEDRATE;
-                                specialMoveZ(where_i_am.z + 1, SLOW_Z_FEEDRATE);
-                                specialMoveZ(where_i_am.z - 2, SLOW_Z_FEEDRATE);                                
-                                where_i_am.z = 0;
+                        {
+                                bool axisSelected = false;
+                                if(gc.seen & GCODE_X)
+                                {
+                                  zeroX();
+                                  axisSelected = true;
+                                }
+                                if(gc.seen & GCODE_Y)
+                                {
+                                  zeroY();
+                                  axisSelected = true;
+                                }                                
+                                if(gc.seen & GCODE_Z)
+                                {
+                                  zeroZ();
+                                  axisSelected = true;
+                                }
+                                if(!axisSelected)
+                                {
+                                  zeroX();
+                                  zeroY();
+                                  zeroZ();
+                                }
                                 where_i_am.f = SLOW_XY_FEEDRATE;     // Most sensible feedrate to leave it in                    
+                                return;
+                        }
 
-				return;
-
-
-                  default:
+                        default:
                                 break;
                 }
                 
@@ -623,9 +657,14 @@ void process_string(char instruction[], int size)
 				}
 				break;                             
 
+                        case 190: //devyte: modelled after 109                        
+                		heatedBed.setTemperature((int)gc.S);
+				heatedBed.waitForTemperature();
+                                break;
+
 			default:
 				if(SendDebug & DEBUG_ERRORS)
-                                  {
+                                {
                                   Serial.print("Huh? M");
 				  Serial.println(gc.M, DEC);
                                   FlushSerialRequestResend();
@@ -1362,15 +1401,6 @@ void process_string(char instruction[], int size)
                         case 142: //TODO: set holding pressure
                                 break;
                                 
-                        case 190: //devyte: modelled after 109                        
-#if MOTHERBOARD == 2
-                                //TODO for MOTHERBOARD == 2
-#else
-                		heatedBed.setTemperature((int)gc.S);
-				heatedBed.waitForTemperature();
-#endif
-                                break;
-
 			default:
 				if(SendDebug & DEBUG_ERRORS)
                                     sprintf(talkToHost.string(), "Dud M code: M%d", gc.M);
