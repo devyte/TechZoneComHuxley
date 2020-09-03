@@ -1342,11 +1342,20 @@ void process_string(char instruction[], int size)
                                 break;
                                 
                         case 142: //TODO: set holding pressure
-                                break;                                
+                                break;
+                                
+                        case 190: //devyte: modelled after 109                        
+#if MOTHERBOARD == 2
+                                //TODO for MOTHERBOARD == 2
+#else
+                		heatedBed.setTemperature((int)gc.S);
+				heatedBed.waitForTemperature();
+#endif
+                                break;
 
 			default:
 				if(SendDebug & DEBUG_ERRORS)
-                                  sprintf(talkToHost.string(), "Dud M code: M%d", gc.M);
+                                    sprintf(talkToHost.string(), "Dud M code: M%d", gc.M);
                                 talkToHost.setResend(gc.LastLineNrRecieved+1);
 		}
 
