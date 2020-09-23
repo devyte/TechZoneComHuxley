@@ -51,6 +51,7 @@ public:
    
    void shutdown();
    float stepsPerMM();
+   void  setStepsPerMM(float spm);
       
 private:
 
@@ -88,6 +89,13 @@ private:
      int sampleTemperature();
    
 };
+
+//devyte: for M92
+inline void extruder::stepsPerMM(float spm)
+{
+    sPerMM = spm;
+}
+
 
 inline int extruder::getTarget()
 {
@@ -400,8 +408,10 @@ public:
    void disableStep();
    void shutdown();
    float stepsPerMM();
+   void  stepsPerMM(float spm);
    void controlTemperature();   
    void valveSet(bool open, int dTime); 
+
    
    #ifdef USE_TECHZONETIPMANAGE
 void setTemp(int temp);
@@ -458,6 +468,11 @@ private:
 #endif
  
 };
+
+void  extruder::stepsPerMM(float spm)
+{
+  sPerMM = spm;
+}
 
 inline void extruder::sStep()
 {

@@ -89,6 +89,13 @@ intercom talker;
 
 #if MOTHERBOARD == 3
 
+
+float X_STEPS_PER_MM = X_STEPS_PER_MM_DEFAULT;
+float Y_STEPS_PER_MM = Y_STEPS_PER_MM_DEFAULT;
+float Z_STEPS_PER_MM = Z_STEPS_PER_MM_DEFAULT;
+float E0_STEPS_PER_MM = E0_STEPS_PER_MM_DEFAULT;
+
+
 #if EXTRUDER_COUNT == 2            
 static extruder ex1(EXTRUDER_1_STEP_PIN, EXTRUDER_1_DIR_PIN, EXTRUDER_1_ENABLE_PIN, EXTRUDER_1_HEATER_PIN, EXTRUDER_1_TEMPERATURE_PIN, E1_STEPS_PER_MM);            
 #endif
@@ -327,6 +334,10 @@ inline void setUnits(bool u)
      cdda[i]->set_units(u); 
 }
 
+inline bool getUnits()
+{
+  cdda[0]->get_units();  //devyte: they're all supopsed to be set to the same, so just return the first one
+}
 
 inline void setPosition(const FloatPoint& p)
 {

@@ -30,7 +30,8 @@
 
 // The width of Henry VIII's thumb (or something).
 
-#define INCHES_TO_MM 25.4 // *RO
+#define INCHES_TO_MM 25.4f // *RO
+#define MM_TO_INCHES 3.937007874E-2f
 
 // The number of real extruders in this machine
 
@@ -188,16 +189,16 @@
 
 // Axis scaling in stepper-motor steps per mm of movement
 
-#define X_STEPS_PER_MM   10.047
+#define X_STEPS_PER_MM_DEFAULT   10.047
 #define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define INVERT_X_DIR 0
 
-#define Y_STEPS_PER_MM   10.047
+#define Y_STEPS_PER_MM_DEFAULT   10.047
 #define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define INVERT_Y_DIR 0
 
 //#define Z_STEPS_PER_MM   805.030
-#define Z_STEPS_PER_MM   1000 //devyte
+#define Z_STEPS_PER_MM_DEFAULT   1000 //devyte
 #define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
 #define INVERT_Z_DIR 0
 
@@ -206,9 +207,10 @@
 // extrude 1mm out of the nozzle.  E0 for extruder 0;
 // E1 for extruder 1, and so on.
 
-//#define E_STEPS_PER_MM   0.9      // NEMA 17 extruder 5mm diameter drive - empirically adjusted
-#define E0_STEPS_PER_MM   3.5      // NEMA 17 59/11 geared extruder 8mm diameter drive
-#define E1_STEPS_PER_MM   17.6      // NEMA 17 59/11 geared extruder 8mm diameter drive
+//#define E_STEPS_PER_MM   0.9                // NEMA 17 extruder 5mm diameter drive - empirically adjusted
+//#define E0_STEPS_PER_MM_DEFAULT   3.5       // NEMA 17 59/11 geared extruder 8mm diameter drive
+#define E0_STEPS_PER_MM_DEFAULT   151.5151    // NEMA 17 devyte: 75/9 gears, 400 steps/turn, 22mm/turn of the big gear => 400 * 75/9 / 22 = 151.5151 steps/mm input filament
+#define E1_STEPS_PER_MM_DEFAULT   17.6        // NEMA 17 59/11 geared extruder 8mm diameter drive
 
 // The temperature routines get called each time the main loop
 // has gone round this many times
@@ -244,7 +246,7 @@
 
 // Data for acceleration calculations
 // Comment out the next line to turn accelerations off
-#define ACCELERATION_ON
+//#define ACCELERATION_ON //devyte: disable to test
 #define SLOW_XY_FEEDRATE 1000.0 // Speed from which to start accelerating
 #define SLOW_Z_FEEDRATE 20
 
