@@ -377,7 +377,6 @@ void cartesian_dda::dda_start()
 
 void cartesian_dda::enable_steppers()
 {
-#if MOTHERBOARD > 0
   if(delta_steps.x)
     digitalWrite(X_ENABLE_PIN, ENABLE_ON);
   if(delta_steps.y)    
@@ -386,14 +385,12 @@ void cartesian_dda::enable_steppers()
     digitalWrite(Z_ENABLE_PIN, ENABLE_ON);
   if(delta_steps.e)
     ex[extruder_in_use]->enableStep();
-#endif  
 }
 
 
 
 void cartesian_dda::disable_steppers()
 {
-#if MOTHERBOARD > 0
 	//disable our steppers
 #if DISABLE_X
 	digitalWrite(X_ENABLE_PIN, !ENABLE_ON);
@@ -407,7 +404,6 @@ void cartesian_dda::disable_steppers()
 
         ex[extruder_in_use]->disableStep();
         
-#endif
 }
 
 void cartesian_dda::shutdown()

@@ -37,123 +37,12 @@
 
 #define EXTRUDER_COUNT 1
 
-//*********************************************************************************************
-
-// These settings are mainly for Darwin
-
-#if MOTHERBOARD == 1
-
-// Temperature measurement
-// Uncomment ONE of the next three
-#define USE_THERMISTOR
-//#define AD595_THERMOCOUPLE
-//#define MAX6675_THERMOCOUPLE
-
-// Uncomment the next line if this is driving a paste extruder
-//#define PASTE_EXTRUDER
-
-
-// Set to 1 if enable pins are inverting
-// For RepRap stepper boards version 1.x the enable pins are *not* inverting.
-// For RepRap stepper boards version 2.x and above the enable pins are inverting.
-#define INVERT_ENABLE_PINS 0
-
-// Set to one if the axis opto-sensor outputs inverting (ie: 1 means open, 0 means closed)
-// RepRap opto endstops with H21LOI sensors are not inverting; ones with H21LOB
-// are inverting.
-
-#define X_ENDSTOP_INVERTING false
-#define Y_ENDSTOP_INVERTING false
-#define Z_ENDSTOP_INVERTING false
-
-#define X_STEPS_PER_MM   7.99735
-#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_X_DIR 0
-
-#define Y_STEPS_PER_MM   7.99735
-#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_Y_DIR 0
-
-#define Z_STEPS_PER_MM   320
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_Z_DIR 0
-
-// Stepper-driven extruder
-// E_STEPS_PER_MM is the number of steps needed to 
-// extrude 1mm out of the nozzle.  E0 for extruder 0;
-// E1 for extruder 1, and so on.
-
-//#define E_STEPS_PER_MM   0.9     // NEMA 17 extruder 5mm diameter drive - empirically adjusted
-#define E0_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
-#define E1_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
-
-// The temperature routines get called each time the main loop
-// has gone round this many times
-
-#define SLOW_CLOCK 2000
-
-#endif
-
-//**********************************************************************************************
-
-// These settings are mainly for a standard Mendel
-
-#if MOTHERBOARD == 2
-
-// Comment out the next line if you are running a Darwin with a MOTHERBOARD > 1
-
-//#define MENDEL 1
-
-// Set to 1 if enable pins are inverting
-// For RepRap stepper boards version 1.x the enable pins are *not* inverting.
-// For RepRap stepper boards version 2.x and above the enable pins are inverting.
-#define INVERT_ENABLE_PINS 1
-
-// Set to one if the axis opto-sensor outputs inverting (ie: 1 means open, 0 means closed)
-// RepRap opto endstops with H21LOI sensors are not inverting; ones with H21LOB
-// are inverting.
-
-#define X_ENDSTOP_INVERTING true
-#define Y_ENDSTOP_INVERTING true
-#define Z_ENDSTOP_INVERTING true
-
-#define MY_NAME 'H'           // Byte representing the name of this device
-#define E0_NAME '0'           // Byte representing the name of extruder 0
-#define E1_NAME '1'           // Byte representing the name of extruder 1
-
-#define RS485_MASTER  1       // *RO
-
-// Axis scaling in stepper-motor steps per mm of movement
-
-#define X_STEPS_PER_MM   10.047
-#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_X_DIR 0
-
-#define Y_STEPS_PER_MM   10.047
-#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_Y_DIR 0
-
-#define Z_STEPS_PER_MM   833.398
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM) // *RO
-#define INVERT_Z_DIR 0
-
-// Stepper-driven extruder
-// E_STEPS_PER_MM is the number of steps needed to 
-// extrude 1mm out of the nozzle.  E0 for extruder 0;
-// E1 for extruder 1, and so on.
-
-//#define E_STEPS_PER_MM   0.9     // NEMA 17 extruder 5mm diameter drive - empirically adjusted
-#define E0_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
-#define E1_STEPS_PER_MM   2.2      // NEMA 17 59/11 geared extruder 8mm diameter drive
-
-#endif
 
 //**********************************************************************************************
 
 // These settings are mainly for a Mendel with an Arduino Mega controller and Pololu stepper drivers
 // See http://reprap.org/wiki/Pololu_Electronics
 
-#if MOTHERBOARD == 3
 
 //#define MENDEL 1
 
@@ -162,16 +51,6 @@
 //#define USE_DS2760
 #define USE_TECHZONETIPMANAGE
 
-#ifdef USE_DS2760
- #define OW 13
- #define OWTroubleshoot 13
- #define ReadNet 0x33
- #define SkipNet 0xCC
- #define RdReg 0x69
- #define thermoTypeK
- //#define thermoTypeJ
- //#define thermoTypeT
-#endif
 // Set to 1 if enable pins are inverting
 // For RepRap stepper boards version 1.x the enable pins are *not* inverting.
 // For RepRap stepper boards version 2.x and above the enable pins are inverting.
@@ -217,7 +96,6 @@
 
 #define SLOW_CLOCK 2000
 
-#endif
 
 //**********************************************************************************************
 
@@ -346,28 +224,3 @@ inline void resetTimer()
 
 #endif
 
-//*************************************************************************
-
-#if 0
-// Green machine:
-//#define ENDSTOPS_INVERTING 0
-
-// parameters for the Bath U. mendel prototype
-#define X_STEPS_PER_MM   13.333333
-#define X_STEPS_PER_INCH (X_STEPS_PER_MM*INCHES_TO_MM)
-#define INVERT_X_DIR 0
-
-#define Y_STEPS_PER_MM   13.333333
-#define Y_STEPS_PER_INCH (Y_STEPS_PER_MM*INCHES_TO_MM)
-#define INVERT_Y_DIR 0
-
-// Green machine:
-#define Z_STEPS_PER_MM   944.88
-// Fat Z cog machine:
-//#define Z_STEPS_PER_MM   558.864
-// Standard Mendel:
-//#define Z_STEPS_PER_MM   833.398
-#define Z_STEPS_PER_INCH (Z_STEPS_PER_MM*INCHES_TO_MM)
-#define INVERT_Z_DIR 0
-
-#endif
