@@ -6,9 +6,7 @@
  */
 
 
-#if MOTHERBOARD != 2
 
-   #ifdef USE_TECHZONETIPMANAGE
    
 void bed::setTemp(int temp)
 {
@@ -175,9 +173,6 @@ byte bed::timeoutLow()
   } 
   return 1;
 }
-   #else
-static PIDcontrol bPID(BED_HEATER_PIN, BED_TEMPERATURE_PIN, true);
-#endif
 
 bed::bed(byte heat, byte temp)
 {
@@ -186,10 +181,6 @@ bed::bed(byte heat, byte temp)
 
   manageCount = 0;
   
-   #ifdef USE_TECHZONETIPMANAGE
-   #else
-  bedPID = &bPID;
-#endif
   //setup our pins
 
   pinMode(heater_pin, OUTPUT);
@@ -203,10 +194,6 @@ bed::bed(byte heat, byte temp)
 
 void bed::controlTemperature()
 {   
-   #ifdef USE_TECHZONETIPMANAGE
-   #else
-  bedPID->pidCalculation();
-#endif
 }
 
 
@@ -265,4 +252,3 @@ void bed::temperatureError()
   talkToHost.setFatal();
 }
 
-#endif
