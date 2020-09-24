@@ -9,10 +9,6 @@
 #include "intercom.h"
 #include "pins.h"
 #include "Temperature.h"
-#ifdef USE_TECHZONETIPMANAGE
-#else
-#include "pid.h"
-#endif
 #include "bed.h"
 #include "extruder.h"
 #include "cartesian_dda.h"
@@ -49,45 +45,8 @@ extruder* ex[EXTRUDER_COUNT];
 byte extruder_in_use = 0;
 
 
-// Old Mothers...
-
-#if MOTHERBOARD == 1
-
-// TODO: For some reason, if you declare the following two in the order ex0 ex1 then
-// ex0 won't drive its stepper.  They seem fine this way round though.  But that's got
-// to be a bug.
-
-#if EXTRUDER_COUNT == 2            
-static extruder ex1(EXTRUDER_1_MOTOR_DIR_PIN, EXTRUDER_1_MOTOR_SPEED_PIN , EXTRUDER_1_HEATER_PIN,
-              EXTRUDER_1_FAN_PIN,  EXTRUDER_1_TEMPERATURE_PIN, EXTRUDER_1_VALVE_DIR_PIN,
-              EXTRUDER_1_VALVE_ENABLE_PIN, EXTRUDER_1_STEP_ENABLE_PIN, E1_STEPS_PER_MM);            
-#endif
-
-static extruder ex0(EXTRUDER_0_MOTOR_DIR_PIN, EXTRUDER_0_MOTOR_SPEED_PIN , EXTRUDER_0_HEATER_PIN,
-            EXTRUDER_0_FAN_PIN,  EXTRUDER_0_TEMPERATURE_PIN, EXTRUDER_0_VALVE_DIR_PIN,
-            EXTRUDER_0_VALVE_ENABLE_PIN, EXTRUDER_0_STEP_ENABLE_PIN, E0_STEPS_PER_MM);
-   
-static bed heatedBed(BED_HEATER_PIN, BED_TEMPERATURE_PIN);
-
-#endif
-
-// Standard Mendel
-
-#if MOTHERBOARD == 2
-
-#if EXTRUDER_COUNT == 2    
-static extruder ex1(E1_NAME, E1_STEPS_PER_MM);            
-#endif
-
-static extruder ex0(E0_NAME, E0_STEPS_PER_MM);
-
-intercom talker;
-
-#endif
-
 // Arduino Mega
 
-#if MOTHERBOARD == 3
 
 
 float X_STEPS_PER_MM = X_STEPS_PER_MM_DEFAULT;
@@ -104,7 +63,6 @@ static extruder ex0(EXTRUDER_0_STEP_PIN, EXTRUDER_0_DIR_PIN, EXTRUDER_0_ENABLE_P
 
 static bed heatedBed(BED_HEATER_PIN, BED_TEMPERATURE_PIN);
 
-#endif
 
 static hostcom talkToHost;
 
@@ -175,9 +133,7 @@ void setup()
   setupGcodeProcessor();
   
   ex[0] = &ex0;
-#if EXTRUDER_COUNT == 2  
-  ex[1] = &ex1;
-#endif  
+
   extruder_in_use = 0; 
   
   head = 0;
@@ -197,12 +153,6 @@ void setup()
   
   talkToHost.start();
   
-#if MOTHERBOARD == 2 
-    pinMode(PS_ON_PIN, OUTPUT);  // add to run G3 as built by makerbot
-    digitalWrite(PS_ON_PIN, LOW);   // ditto
-    delay(2000);    
-    rs485Interface.begin(RS485_BAUD);  
-#endif
 
   setTimer(DEFAULT_TICK);
   enableTimerInterrupt();
@@ -226,11 +176,9 @@ void shutdown()
 
   // Motors off
   
-#if MOTHERBOARD > 0  
   digitalWrite(X_ENABLE_PIN, !ENABLE_ON);
   digitalWrite(Y_ENABLE_PIN, !ENABLE_ON);
   digitalWrite(Z_ENABLE_PIN, !ENABLE_ON);
-#endif
 
   // Stop the extruders
   
@@ -239,9 +187,7 @@ void shutdown()
 
 // If we run the bed, turn it off.
 
-#if MOTHERBOARD != 2
   heatedBed.shutdown();
-#endif
 
 //  int a=50;
 //  while(a--) {blink(); delay(50);}
@@ -263,9 +209,7 @@ void manage()
 {
   for(byte i = 0; i < EXTRUDER_COUNT; i++)
     ex[i]->manage();
-#if MOTHERBOARD != 2    
   heatedBed.manage();
-#endif  
 }
 
 //long count = 0;
@@ -276,9 +220,6 @@ void loop()
   nonest = false;
    manage();
    get_and_do_command(); 
-#if MOTHERBOARD == 2
-   talker.tick();
-#endif
 }
 
 //******************************************************************************************
